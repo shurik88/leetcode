@@ -3,3 +3,8 @@
 ################################################################################
 
 /LeetCode/.vs/LeetCode/v15
+/LeetCode/src/AlgorithmProblems/bin
+/LeetCode/src/AlgorithmProblems/obj
+*.suo
+*.sqlite
+*.json
