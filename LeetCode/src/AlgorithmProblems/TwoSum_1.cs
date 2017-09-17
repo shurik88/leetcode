@@ -10,55 +10,18 @@ namespace AlgorithmProblems
     {
         public int[] TwoSum(int[] nums, int target)
         {
-            QuickSort(nums, 0, nums.Length - 1);
-            int rightIndex = nums.Length - 1;
-            int leftIndex = 0;
-            while (true)
+            var set = new Dictionary<int, int>();
+            for (var i = 0; i < nums.Length; ++i)
             {
-                var sum = nums[leftIndex] + nums[rightIndex];
-                if (sum == target)
-                    return new int[2] { leftIndex, rightIndex };
-                else if (sum > target)
-                    rightIndex--;
-                else
-                    leftIndex++;
-            }
-        }
-
-        static readonly Random Rand = new Random();
-
-        private static void QuickSort(int[] arr, int left, int right)
-        {
-            if (left == right)
-                return;
-            var x = arr[Rand.Next(left, right)];
-            var i = left;
-            var j = right;
-            while (i <= j)
-            {
-                while (arr[i] < x)
-                    i++;
-                while (arr[j] > x)
-                    j--;
-                if (i <= j)
+                var remain = target - nums[i];
+                if (set.ContainsKey(remain))
                 {
-                    Swap(arr, i, j);
-                    i++;
-                    j--;
+                    return (new int[2] {i, set[remain]}).OrderBy(x => x).ToArray();
                 }
+                if(!set.ContainsKey(nums[i]))
+                    set.Add(nums[i], i);
             }
-
-            if (i < right)
-                QuickSort(arr, i, right);
-            if (left < j)
-                QuickSort(arr, left, j);
-        }
-
-        private static void Swap(int[] arr, int i, int j)
-        {
-            var temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            throw new Exception("Numbers not found");
         }
     }
 }
