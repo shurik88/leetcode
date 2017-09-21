@@ -8,3 +8,8 @@
 *.suo
 *.sqlite
 *.json
+/LeetCode/packages/MSTest.TestAdapter.1.1.11
+/LeetCode/packages/MSTest.TestFramework.1.1.11
+/LeetCode/src/AlgorithmTests/bin/Debug
+/LeetCode/src/AlgorithmTests/obj/Debug
+/LeetCode/packages

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE4F7554-BF01-4222-B7F6-B5BF7120DA1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmProblems", "src\AlgorithmProblems\AlgorithmProblems.csproj", "{D981DE81-12FE-44B1-986F-938F4B99A9E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmTests", "src\AlgorithmTests\AlgorithmTests.csproj", "{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,11 +19,16 @@ Global
 		{D981DE81-12FE-44B1-986F-938F4B99A9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D981DE81-12FE-44B1-986F-938F4B99A9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D981DE81-12FE-44B1-986F-938F4B99A9E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D981DE81-12FE-44B1-986F-938F4B99A9E7} = {EE4F7554-BF01-4222-B7F6-B5BF7120DA1F}
+		{C7B287EC-DC7D-4D03-AFB9-98CE74F79E25} = {EE4F7554-BF01-4222-B7F6-B5BF7120DA1F}
 	EndGlobalSection
 EndGlobal
