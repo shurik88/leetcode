@@ -46,6 +46,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseNumber_7.cs" />
+    <Compile Include="RomanNumber_12.cs" />
+    <Compile Include="Sum3_15.cs" />
     <Compile Include="TwoNumbers_2.cs" />
     <Compile Include="TwoSum_1.cs" />
   </ItemGroup>

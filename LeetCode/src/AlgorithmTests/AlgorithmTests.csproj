@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ReverseNumberTest_7.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RomanNumberTest_8.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
