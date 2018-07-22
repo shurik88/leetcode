@@ -10,6 +10,8 @@ namespace AlgorithmProblems
     {
         static void Main(string[] args)
         {
+            var test = new Valid_Parentheses__20();
+            test.IsValid("()[]{}");
             var plus = (int)'+';
             var code1 = (int)'0';
             var code2 = (int)'9';
