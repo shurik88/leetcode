@@ -45,11 +45,15 @@
     <Compile Include="Atoi_8.cs" />
     <Compile Include="IntegerToRoman_12.cs" />
     <Compile Include="MedianOfSortedArrays_4.cs" />
+    <Compile Include="MergeKSortedLists_24.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoveNFromLInkedList_19.cs" />
     <Compile Include="ReverseNumber_7.cs" />
     <Compile Include="RomanNumber_12.cs" />
+    <Compile Include="Structures\Heap\Heap.cs" />
+    <Compile Include="Structures\Heap\HeapElem.cs" />
+    <Compile Include="Structures\Heap\HeapType.cs" />
     <Compile Include="TwoNumbers_2.cs" />
     <Compile Include="TwoSum_1.cs" />
     <Compile Include="Valid Parentheses _20.cs" />
