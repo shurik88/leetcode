@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace AlgorithmProblems
 {
-    public class RomanNumber_12
+    public class RomanNumberAlgorithm
     {
-        public string IntToRoman(int num)
+        public string IntToRoman_12(int num)
         {
             var numbers = new RomanNumber[7]
             {
@@ -52,6 +52,37 @@ namespace AlgorithmProblems
             }
             list.Reverse();
             return string.Concat(list);
+        }
+
+        public int RomanToInt_13(string s)
+        {
+            var dict = new Dictionary<char, int>
+            {
+                ['I'] = 1,
+                ['V'] = 5,
+                ['X'] = 10,
+                ['L'] = 50,
+                ['C'] = 100,
+                ['D'] = 500,
+                ['M'] = 1000
+            };
+            var res = 0;
+            var i = 0;
+            while(i < s.Length)
+            {
+                var num = dict[s[i]];
+                if(i < s.Length - 1 && dict[s[i]] < dict[s[i+1]])
+                {
+                    res += dict[s[i + 1]] - num;
+                    i += 2;
+                }
+                else
+                {
+                    res += num;
+                    i++;
+                }
+            }
+            return res;
         }
 
         private struct RomanNumber
