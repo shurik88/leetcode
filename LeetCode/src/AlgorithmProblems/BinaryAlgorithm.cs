@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AlgorithmProblems
 {
@@ -222,6 +224,53 @@ namespace AlgorithmProblems
             if (bitsCount == 0)
                 bitsCount = 1;
             return (1 << bitsCount) - 1 - n;
+        }
+
+        /// <summary>
+        ///     1356. Sort Integers by The Number of 1 Bits
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/?envType=daily-question&envId=2026-02-25"/>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public int[] SortByBits_1356(int[] arr)
+        {
+            Array.Sort(arr, new SortByBitComparer());
+            return arr;
+        }
+
+        public static int CountSetBitsSimple(int n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                // Check if the last bit is a 1
+                count += n & 1;
+                // Right shift the number by 1 bit
+                n >>= 1;
+            }
+            return count;
+        }
+
+        public static int CountSetBitsKernighan(int n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                // Remove the rightmost 1 bit
+                n &= (n - 1);
+                count++;
+            }
+            return count;
+        }
+
+        private class SortByBitComparer : IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                int xcount = BitOperations.PopCount((uint)x);
+                int ycount = BitOperations.PopCount((uint)y);
+                return xcount == ycount ? x.CompareTo(y) : xcount.CompareTo(ycount);
+            }
         }
     }
 }

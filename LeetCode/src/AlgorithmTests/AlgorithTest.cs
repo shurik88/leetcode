@@ -136,34 +136,36 @@ namespace AlgorithmTests
             sut.MinPartitions_1689(number).Should().Be(res);
         }
 
-        public class MatrixData
+        public class MatrixData<T, TResult>
+            where T : struct
+            where TResult: struct
         {
-            public int[][] Input { get; set; }
+            public T[][] Input { get; set; }
 
-            public int Result { get; set; }
+            public TResult Result { get; set; }
         }
 
-        private static IEnumerable<MatrixData> GetMatrixMinSwapData()
+        private static IEnumerable<MatrixData<int, int>> GetMatrixMinSwapData()
         {
-            yield return new MatrixData { Input = [[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], Result = 12 };
-            yield return new MatrixData { Input = [[0, 0, 1], [1, 1, 0], [1, 0, 0]], Result = 3 };
-            yield return new MatrixData { Input = [[1, 0, 0], [1, 1, 0], [1, 1, 1]], Result = 0 };
-            yield return new MatrixData { Input = [[0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0]], Result = -1 };
-            yield return new MatrixData { Input = [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]], Result = 5 };
-            yield return new MatrixData { Input = [[1, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0], [1, 1, 1, 0, 0, 0], [1, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0]], Result = 2 };
-            yield return new MatrixData { Input = [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]], Result = 4 };
+            yield return new MatrixData<int, int> { Input = [[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], Result = 12 };
+            yield return new MatrixData<int, int> { Input = [[0, 0, 1], [1, 1, 0], [1, 0, 0]], Result = 3 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0], [1, 1, 0], [1, 1, 1]], Result = 0 };
+            yield return new MatrixData<int, int> { Input = [[0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 1, 1, 0]], Result = -1 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1]], Result = 5 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0], [1, 1, 1, 0, 0, 0], [1, 1, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0]], Result = 2 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1]], Result = 4 };
         }
 
-        private static IEnumerable<MatrixData> GetSpecialPostionsInBinaryMatrixData()
+        private static IEnumerable<MatrixData<int, int>> GetSpecialPostionsInBinaryMatrixData()
         {
-            yield return new MatrixData { Input = [[1, 0, 0], [0, 0, 1], [1, 0, 0]], Result = 1 };
-            yield return new MatrixData { Input = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], Result = 3 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0], [0, 0, 1], [1, 0, 0]], Result = 1 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 0], [0, 1, 0], [0, 0, 1]], Result = 3 };
         }
 
 
         [TestMethod]
         [DynamicData(nameof(GetMatrixMinSwapData))]
-        public void MatrixMinSwaps(MatrixData data)
+        public void MatrixMinSwaps(MatrixData<int, int> data)
         {
             var sut = new MatrixAlgorithm();
             sut.MinSwaps_1536(data.Input).Should().Be(data.Result);
@@ -171,7 +173,7 @@ namespace AlgorithmTests
 
         [TestMethod]
         [DynamicData(nameof(GetSpecialPostionsInBinaryMatrixData))]
-        public void GetSpecialPostionsInBinaryMatrix(MatrixData data)
+        public void GetSpecialPostionsInBinaryMatrix(MatrixData<int, int> data)
         {
             var sut = new MatrixAlgorithm();
             sut.GetSpecialPostionsInBinaryMatrix_1582(data.Input).Should().Be(data.Result);
@@ -260,5 +262,103 @@ namespace AlgorithmTests
             var sut = new BinaryAlgorithm();
             sut.ComplementofBase10Integer_1009(n).Should().Be(res);
         }
+
+        [TestMethod]
+        [DataRow(4, new int[] { 2, 1, 1 }, 3)]
+        [DataRow(10, new int[] { 3, 2, 2, 4 }, 12)]
+        [DataRow(5, new int[] { 1 }, 15)]
+        [DataRow(5, new int[] { 1, 7 }, 10)]
+        [DataRow(100000, new int[] { 1  }, 5000050000)]
+        [DataRow(100000, new int[] { 1000000 }, 5000050000000000)]
+        public void MinNumberOfSeconds_3296(int mountainHeight, int[] workerTimes, long res)
+        {
+            var sut = new LifeProblem();
+            sut.MinNumberOfSeconds_3296(mountainHeight, workerTimes).Should().Be(res);
+        }
+
+        [TestMethod]
+        [DataRow(1, 3, "c")]
+        [DataRow(1, 4, "")]
+        [DataRow(3, 9, "cab")]
+        public void GetHappyString_1415(int n, int k, string res)
+        {
+            var sut = new StringAlgorithm();
+            sut.GetHappyString_1415(n, k).Should().Be(res);
+        }
+
+        private static IEnumerable<MatrixData<int, int>> GetLargestSubmatrixData()
+        {
+            yield return new MatrixData<int, int> { Input = [[0, 0, 1], [1, 1, 1], [1, 0, 1]], Result = 4 };
+            yield return new MatrixData<int, int> { Input = [[1, 0, 1, 0, 1]], Result = 3 };
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetLargestSubmatrixData))]
+        public void LargestSubmatrix_1727(MatrixData<int, int> data)
+        {
+            var sut = new MatrixAlgorithm();
+            sut.LargestSubmatrix(data.Input).Should().Be(data.Result);
+        }
+
+        private static IEnumerable<MatrixData<char, int>> GetNumberOfSubmatrices_3212()
+        {
+            yield return new MatrixData<char, int> { Input = [['X', 'Y', '.'], ['Y', '.', '.']], Result = 3 };
+            yield return new MatrixData<char, int> { Input = [['X', 'X'], ['X', 'Y']], Result = 0 };
+            yield return new MatrixData<char, int> { Input = [['.', '.'], ['.', '.']], Result = 0 };
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetNumberOfSubmatrices_3212))]
+        public void NumberOfSubmatrices_3212(MatrixData<char, int> data)
+        {
+            var sut = new MatrixAlgorithm();
+            sut.NumberOfSubmatrices(data.Input).Should().Be(data.Result);
+        }
+
+        //[TestMethod]
+        //public void ReverseSubmatrix()
+        //{
+        //    var sut = new MatrixAlgorithm();
+        //    int[][] data = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+        //    var res = sut.ReverseSubmatrix(data, 1, 0, 3);
+        //}
+
+        private static IEnumerable<MatrixData<int, bool>> GetCanPartitionGrid_3546()
+        {
+            yield return new MatrixData<int, bool> { Input = [[54756, 54756]], Result = true };
+            yield return new MatrixData<int, bool> { Input = [[1, 4], [2, 3]], Result = true };
+            yield return new MatrixData<int, bool> { Input = [[1, 3], [2, 4]], Result = false };
+            yield return new MatrixData<int, bool> { Input = [[65917, 79299]], Result = false };
+        }
+        [TestMethod]
+        [DynamicData(nameof(GetCanPartitionGrid_3546))]
+        public void CanPartitionGrid_3546(MatrixData<int, bool> data)
+        {
+            var sut = new MatrixAlgorithm();
+            sut.CanPartitionGrid(data.Input).Should().Be(data.Result);
+        }
+
+        public class MatrixSimilarData
+        {
+            public MatrixData<int, bool> Data { get; set; }
+
+            public int K { get; set; }
+        }
+        private static IEnumerable<MatrixSimilarData> GetAreSimilar_2946()
+        {
+            yield return new MatrixSimilarData { Data = new MatrixData<int, bool> { Input = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], Result = false }, K = 4 };
+            yield return new MatrixSimilarData { Data = new MatrixData<int, bool> { Input = [[1, 2, 1, 2], [5, 5, 5, 5], [6, 3, 6, 3]], Result = true }, K = 2 };
+            yield return new MatrixSimilarData { Data = new MatrixData<int, bool> { Input = [[2, 2], [2, 2]], Result = true }, K = 3 };
+        }
+
+
+        [TestMethod]
+        [DynamicData(nameof(GetAreSimilar_2946))]
+        public void AreSimilar_2946(MatrixSimilarData data)
+        {
+            var sut = new MatrixAlgorithm();
+            sut.AreSimilar(data.Data.Input, data.K).Should().Be(data.Data.Result);
+        }
+
     }
 }

@@ -92,5 +92,45 @@ namespace AlgorithmProblems
             }
             return rains;
         }
+
+        /// <summary>
+        /// 3296. Minimum Number of Seconds to Make Mountain Height Zero
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/minimum-number-of-seconds-to-make-mountain-height-zero/description/"/>
+        /// <param name="mountainHeight"></param>
+        /// <param name="workerTimes"></param>
+        /// <returns></returns>
+        public long MinNumberOfSeconds_3296(int mountainHeight, int[] workerTimes)
+        {
+            var heap = new PriorityQueue<int, long>(workerTimes.Length);//index in workerTimes, curr workerWeight(init value of workerTimes)
+            var times = new long[workerTimes.Length];
+            var attempts = new int[workerTimes.Length];
+            for (var  i = 0; i < workerTimes.Length; ++i)
+            {
+                heap.Enqueue(i, workerTimes[i]);
+            }
+            long maxSeconds = 0;
+            var remain = mountainHeight;
+            while (remain > 0)
+            {
+                var item = heap.Dequeue();
+                remain -= 1;
+                attempts[item]++;
+                times[item] += (long)workerTimes[item] * attempts[item];
+                if (maxSeconds < times[item])
+                    maxSeconds = times[item];
+                heap.Enqueue(item, times[item] + (attempts[item] + 1) * (long)workerTimes[item]);
+            }
+            return maxSeconds;
+        }
+
+        private struct Element3296
+        {
+            public int Count { get; set; }
+
+            public int Index { get; set; }
+
+            public int Weight { get; set; }
+        }
     }
 }
