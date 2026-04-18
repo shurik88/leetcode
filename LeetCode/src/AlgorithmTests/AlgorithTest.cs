@@ -360,5 +360,13 @@ namespace AlgorithmTests
             sut.AreSimilar(data.Data.Input, data.K).Should().Be(data.Data.Result);
         }
 
+        [TestMethod]
+        [DataRow(new int[] { 1, 3, 1, 4, 1, 3, 2 }, new int[] { 0, 3, 5 }, new int[] { 2, -1, 3 })]
+        public void SolveQueries_3488(int[] nums, int[] queries, int[] expectedMinDistances)
+        {
+            var sut = new ArrayAlgorithm();
+            sut.SolveQueries(nums, queries).ToArray().Should().Equal(expectedMinDistances);
+        }
+
     }
 }

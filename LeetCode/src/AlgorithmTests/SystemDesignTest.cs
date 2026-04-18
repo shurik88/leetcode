@@ -192,5 +192,46 @@ namespace AlgorithmTests
             public const string Inc = "inc";
             public const string Dec = "dec";
         }
+
+        [TestMethod]
+        public void Twitter_Q2()
+        {
+            var sut = new Twitter();
+            sut.PostTweet(1, 5);
+            var feed = sut.GetNewsFeed(1);
+            sut.Follow(1, 2);
+            sut.PostTweet(2, 6);
+            feed = sut.GetNewsFeed(1);
+            sut.Unfollow(1, 2);
+            feed = sut.GetNewsFeed(1);
+            /*
+             "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"]
+[[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]]
+             */
+        }
+
+        [TestMethod]
+        public void RangeModule_Q1()
+        {
+            var sut = new RangeModule();
+            sut.AddRange(10, 14);
+            sut.AddRange(5, 9);
+            //var query = sut.QueryRange(12, 13);
+            //query = sut.QueryRange(3, 8);
+            //query = sut.QueryRange(15, 17);
+            //query = sut.QueryRange(9, 16);
+            //query = sut.QueryRange(8, 11);
+            sut.AddRange(18, 20);
+            sut.AddRange(11, 21);
+        }
+
+        [TestMethod]
+        [DataRow(new int[] { 12, 33, 4, 56, 22, 2, 34, 33, 22, 12, 34, 56 }, 1, 2, 4, 1)]
+        [DataRow(new int[] { 12, 33, 4, 56, 22, 2, 34, 33, 22, 12, 34, 56 }, 0, 11, 33, 2)]
+        public void RangeFreqQuery_Q2(int[] arr, int left, int right, int value, int expectedCount)
+        {
+            var sut = new RangeFreqQuery(arr);
+            sut.Query(left, right, value).Should().Be(expectedCount);
+        }
     }
 }

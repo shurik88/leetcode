@@ -132,5 +132,158 @@ namespace AlgorithmProblems
 
             public int Weight { get; set; }
         }
+
+
+        /// <summary>
+        ///     2751 Robot Colissions
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/robot-collisions/?envType=daily-question&envId=2026-04-01"/>
+        /// <param name="positions"></param>
+        /// <param name="healths"></param>
+        /// <param name="directions"></param>
+        /// <returns></returns>
+        public IList<int> SurvivedRobotsHealths_2751(int[] positions, int[] healths, string directions)
+        {
+            var count = positions.Length;
+            int[] indices = [.. Enumerable.Range(0, count)];
+            Array.Sort(positions, indices);
+            var elimanated = 0;
+            if (elimanated == count)
+                return [];
+
+            //int? currIndex = null;
+            var stack = new Stack<int>();
+            for(var i = 0; i < count; i++)
+            {
+                var itemIndex = indices[i];
+                var itemDirection = directions[itemIndex];
+                if(stack.Count == 0)
+                {
+                    if(itemDirection == 'L')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        stack.Push(itemIndex);
+                    }
+                }
+                else
+                {
+                    if(itemDirection == 'L')
+                    {
+                        while(stack.Count != 0)
+                        {
+                            var lastRightIndex = stack.Peek();
+                            var lastRightHealth = healths[lastRightIndex];
+                            if (lastRightHealth <= healths[itemIndex])
+                            {
+                                stack.Pop();
+                                healths[lastRightIndex] = 0;
+                                if (lastRightHealth == healths[itemIndex])
+                                {
+                                    healths[itemIndex] = 0;
+                                    break;
+                                }
+                                else
+                                {
+                                    healths[itemIndex]--;
+                                }
+                                
+                                
+                                
+                            }
+                            else
+                            {
+                                healths[itemIndex] = 0;
+                                healths[lastRightIndex]--;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        stack.Push(itemIndex);
+                    }
+                }
+            }
+
+            var res = new List<int>(count - elimanated);
+            for (var i = 0; i < count; i++)
+                if (healths[i] != 0)
+                    res.Add(healths[i]);
+
+            return res;
+
+        }
+
+
+        /// <summary>
+        ///     874. Walking Robot Simulation
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/walking-robot-simulation/?envType=daily-question&envId=2026-04-06"/>
+        /// <param name="commands"></param>
+        /// <param name="obstacles"></param>
+        /// <returns></returns>
+        public int RobotSim(int[] commands, int[][] obstacles)
+        {
+            var obstaclesLength = obstacles.Length;
+            var obstaclesHash = new HashSet<(int, int)>();
+            for(var i = 0; i < obstaclesLength;i++)
+            {
+                obstaclesHash.Add((obstacles[i][0], obstacles[i][1]));
+            }
+
+            var maxDistance = 0;
+            var xStep = 0;
+            var yStep = 1;
+            var currX = 0;
+            var currY = 0;
+            foreach(var com in commands)
+            {
+                if (com == -2)
+                {
+                    if (xStep == 0)
+                        (xStep, yStep) = (-1 * yStep, 0);
+                    else
+                        (xStep, yStep) = (0, 1 * xStep);
+                }
+                else if (com == -1)
+                {
+                    if(xStep == 0)
+                        (xStep, yStep) = (yStep, 0);
+                    else
+                        (xStep, yStep) = (0, -1 * xStep);
+
+                }
+                else
+                {
+                    var curr = 0;
+                    var tempX = currX;
+                    var tempY = currY;
+                    while(curr < com)
+                    {
+                        tempX += xStep;
+                        tempY += yStep;
+                        curr++;
+                        if (obstaclesHash.Contains((tempX, tempY)))
+                            break;
+                        else
+                        {
+                            currX = tempX;
+                            currY = tempY;
+                        }
+                    }
+                    var distance = currX * currX + currY * currY;
+                    if(distance > maxDistance)
+                    {
+                        maxDistance = distance;
+                    }
+
+                }
+            }
+
+            return maxDistance;
+        }
     }
 }
