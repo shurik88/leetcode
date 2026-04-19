@@ -368,5 +368,18 @@ namespace AlgorithmTests
             sut.SolveQueries(nums, queries).ToArray().Should().Equal(expectedMinDistances);
         }
 
+        [TestMethod]
+        [DataRow(new int[] { 55, 30, 5, 4, 2 }, new int[] { 100, 20, 10, 10, 5 }, 2)]
+        [DataRow(new int[] { 2, 2, 2 }, new int[] { 10, 10, 1 }, 1)]
+        [DataRow(new int[] { 30, 29, 19, 5 }, new int[] { 25, 25, 25, 25, 25 }, 2)]
+        [DataRow(new int[] { 2, 2, 2 }, new int[] { 2, 2, 2 }, 2)]
+        public void MaxDistance_1855(int[] nums1, int[] nums2, int expected)
+        {
+            var reverseComparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+            //var index = Array.BinarySearch(nums2, 10, reverseComparer);
+            //var t = ~index;
+            var sut = new ArrayAlgorithm();
+            sut.MaxDistance(nums1, nums2).Should().Be(expected);
+        }
     }
 }

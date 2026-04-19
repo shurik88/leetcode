@@ -212,5 +212,68 @@ namespace AlgorithmProblems
             var reverse = Reverse(n);
             return Math.Abs(reverse - n);
         }
+
+        /// <summary>
+        ///     1855. Maximum Distance Between a Pair of Values
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/?envType=daily-question&envId=2026-04-19"/>
+        /// <param name="nums1"></param>
+        /// <param name="nums2"></param>
+        /// <returns></returns>
+        public int MaxDistance(int[] nums1, int[] nums2)
+        {
+            var reverseComparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+            var max = 0;
+            for(var i = 0; i < nums1.Length; ++i)
+            {
+                var index = Array.BinarySearch(nums2, nums1[i], reverseComparer);
+                var exact = index >= 0;
+                if(index >= 0)
+                {
+                    while (index + 1 < nums2.Length && nums2[index] == nums2[index + 1])
+                        index++;
+                }
+                else
+                {
+                    index = ~index;
+                }
+                    
+                if (index >= i)
+                    max = Math.Max(max, index - i - (exact ? 0 : 1));
+                //
+            }
+            return max;
+        }
+
+        /// <summary>
+        ///     1855. Maximum Distance Between a Pair of Values
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/?envType=daily-question&envId=2026-04-19"/>
+        /// <param name="nums1"></param>
+        /// <param name="nums2"></param>
+        /// <returns></returns>
+        public int MaxDistance_2(int[] nums1, int[] nums2)
+        {
+            int maxDist = 0;
+            int i = 0;
+            int j = 0;
+
+            while (i < nums1.Length && j < nums2.Length)
+            {
+                // If the condition is met, update maxDist and try a larger j
+                if (nums1[i] <= nums2[j])
+                {
+                    maxDist = Math.Max(maxDist, j - i);
+                    j++;
+                }
+                else
+                {
+                    // If not met, increment i to find a smaller value in nums1
+                    i++;
+                }
+            }
+
+            return maxDist;
+        }
     }
 }
