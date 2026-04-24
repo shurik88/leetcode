@@ -285,5 +285,48 @@ namespace AlgorithmProblems
 
             return maxDistance;
         }
+
+
+        /// <summary>
+        ///     2078. Two Furthest Houses With Different Colors
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/two-furthest-houses-with-different-colors/?envType=daily-question&envId=2026-04-20"/>
+        /// <param name="colors"></param>
+        /// <returns></returns>
+        public int MaxDistance(int[] colors)
+        {
+            var len = colors.Length;
+            var i = 0;
+            var j = len - 1;
+            while (i != len && colors[i] == colors[len - 1])
+                i++;
+            while (j > 0 && colors[j] == colors[0])
+                j--;
+            return Math.Max(len - i - 1, j);
+
+        }
+
+        /// <summary>
+        /// 2833. Furthest Point From Origin
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/furthest-point-from-origin/?envType=daily-question&envId=2026-04-24"/>
+        /// <param name="moves"></param>
+        /// <returns></returns>
+        public int FurthestDistanceFromOrigin(string moves)
+        {
+            var left = 0;
+            var right = 0;
+            var underscore = 0;
+            for (var i = 0; i < moves.Length; ++i)
+            {
+                if (moves[i] == 'L')
+                    left++;
+                else if (moves[i] == 'R')
+                    right++;
+                else
+                    underscore++;
+            }
+            return Math.Abs(left - right) + underscore;
+        }
     }
 }

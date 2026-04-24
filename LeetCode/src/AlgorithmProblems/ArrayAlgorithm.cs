@@ -275,5 +275,58 @@ namespace AlgorithmProblems
 
             return maxDist;
         }
+
+        /// <summary>
+        ///     2615 Sum of distances
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/sum-of-distances/?envType=daily-question&envId=2026-04-23"/>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public long[] Distance(int[] nums)
+        {
+            var count = nums.Length;
+            //int[] indices = [.. Enumerable.Range(0, count)];
+            //Array.Sort(nums, indices);
+            var dict = new Dictionary<int, List<int>>();
+            for(var  i = 0; i < count; i++)
+            {
+                if (!dict.ContainsKey(nums[i]))
+                {
+                    dict[nums[i]] = [];
+                }
+                dict[nums[i]].Add(i);
+            }
+
+            var res = new long[count];
+            foreach (var group in dict.Values)
+            {
+                var groupCount = group.Count;
+                if (groupCount == 1)
+                    continue;
+                long totalSum = 0;
+                foreach (int index in group) 
+                    totalSum += index;
+                
+                long leftSum = 0;
+                for (int i = 0; i < groupCount; i++)
+                {
+                    long currentIdx = group[i];
+                    // Formula: (currentIdx * count of elements to left - leftSum) + 
+                    //          (rightSum - currentIdx * count of elements to right)
+                    long rightSum = totalSum - leftSum - currentIdx;
+
+                    long leftDist = (long)i * currentIdx - leftSum;
+                    long rightDist = rightSum - (long)(groupCount - 1 - i) * currentIdx;
+
+                    res[currentIdx] = leftDist + rightDist;
+                    leftSum += currentIdx;
+                }
+            }
+            //while()
+
+            return res;
+        }
+
+
     }
 }
