@@ -1,4 +1,5 @@
 ﻿using AlgorithmProblems;
+using AlgorithmProblems.DFS;
 using FluentAssertions;
 using System.Text;
 
@@ -380,6 +381,21 @@ namespace AlgorithmTests
             //var t = ~index;
             var sut = new ArrayAlgorithm();
             sut.MaxDistance(nums1, nums2).Should().Be(expected);
+        }
+
+        private static IEnumerable<MatrixData<int, bool>> GetHasValidPath_1391()
+        {
+            yield return new MatrixData<int, bool> { Input = [[2, 4, 3], [6, 5, 2]], Result = true };
+            yield return new MatrixData<int, bool> { Input = [[1, 2, 1], [1, 2, 1]], Result = false };
+            yield return new MatrixData<int, bool> { Input = [[1, 1, 1, 1, 1, 1, 3]], Result = true };
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetHasValidPath_1391))]
+        public void HasValidPath_1391(MatrixData<int, bool> data)
+        {
+            var sut = new Solution_1391();
+            sut.HasValidPath(data.Input).Should().Be(data.Result);
         }
     }
 }

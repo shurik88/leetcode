@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgorithmProblems.SystemDesign.Quests
+namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     /// Q3. All O`one Data Structure

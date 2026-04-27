@@ -1,4 +1,4 @@
-﻿namespace AlgorithmProblems.SystemDesign.Quests
+﻿namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     /// Q2. Range Frequency Queries

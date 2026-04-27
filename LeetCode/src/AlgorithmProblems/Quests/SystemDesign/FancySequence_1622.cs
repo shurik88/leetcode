@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace AlgorithmProblems.SystemDesign
+namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     ///     1622. Fancy Sequence

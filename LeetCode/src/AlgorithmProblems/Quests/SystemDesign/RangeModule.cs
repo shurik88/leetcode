@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgorithmProblems.SystemDesign.Quests
+namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     ///     A Range Module is a module that tracks ranges of numbers. Design a data structure to track the ranges represented as half-open intervals and query about them.

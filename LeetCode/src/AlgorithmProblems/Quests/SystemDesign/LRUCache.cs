@@ -5,7 +5,7 @@ using System.Text;
 using System.Timers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AlgorithmProblems.SystemDesign.Quests
+namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     ///     Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.

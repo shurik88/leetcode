@@ -1,5 +1,4 @@
-﻿using AlgorithmProblems.SystemDesign;
-using AlgorithmProblems.SystemDesign.Quests;
+﻿using AlgorithmProblems.Quests.SystemDesign;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;

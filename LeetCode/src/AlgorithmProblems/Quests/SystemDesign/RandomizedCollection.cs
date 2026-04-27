@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgorithmProblems.SystemDesign.Quests
+namespace AlgorithmProblems.Quests.SystemDesign
 {
     /// <summary>
     /// Q2. Insert Delete GetRandom O(1) - Duplicates allowed
