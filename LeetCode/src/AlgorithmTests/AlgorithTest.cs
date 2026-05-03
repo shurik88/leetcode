@@ -2,6 +2,7 @@
 using AlgorithmProblems.DFS;
 using FluentAssertions;
 using System.Text;
+using static AlgorithmTests.AlgorithTest;
 
 namespace AlgorithmTests
 {
@@ -396,6 +397,52 @@ namespace AlgorithmTests
         {
             var sut = new Solution_1391();
             sut.HasValidPath(data.Input).Should().Be(data.Result);
+        }
+
+        public class MinOperationsData_2033
+        {
+            public MatrixData<int, int> Data { get; set; }
+
+            public int X { get; set; }
+        }
+
+        private static IEnumerable<MinOperationsData_2033> GetMinOperationsData_2033()
+        {
+            yield return new MinOperationsData_2033 { Data = new MatrixData<int, int> { Input = [[2, 4], [6, 8]], Result = 4 }, X = 2 };
+            yield return new MinOperationsData_2033 { Data = new MatrixData<int, int> { Input = [[1, 5], [2, 3]], Result = 5 }, X = 1 };
+            yield return new MinOperationsData_2033 { Data = new MatrixData<int, int> { Input = [[1, 2], [3, 4]], Result = -1 }, X = 2 };
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetMinOperationsData_2033))]
+        public void MinOperations_2033(MinOperationsData_2033 data)
+        {
+            var sut = new ArrayAlgorithm();
+            sut.MinOperations_2033(data.Data.Input, data.X).Should().Be(data.Data.Result);
+        }
+
+        public class MatrixIntResultIntParam<TArrayType, TResult, TParam>
+            where TArrayType : struct
+            where TResult : struct
+            where TParam : struct
+        {
+            public MatrixData<TArrayType, TResult> Data { get; set; }
+
+            public TParam P { get; set; }
+        }
+
+        private static IEnumerable<MatrixIntResultIntParam<int, int, int>> GetMaxPathScore_3742()
+        {
+            yield return new MatrixIntResultIntParam<int, int, int> { Data = new MatrixData<int, int> { Input = [[0, 1], [2, 0]], Result = 2 }, P = 1 };
+            yield return new MatrixIntResultIntParam<int, int, int> { Data = new MatrixData<int, int> { Input = [[0, 1], [1, 2]], Result = -1 },P = 1 };
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetMaxPathScore_3742))]
+        public void MaxPathScore_3742(MatrixIntResultIntParam<int, int, int> testCase)
+        {
+            var sut = new GridAlgorithm();
+            sut.MaxPathScore_3742(testCase.Data.Input, testCase.P).Should().Be(testCase.Data.Result);
         }
     }
 }

@@ -327,6 +327,72 @@ namespace AlgorithmProblems
             return res;
         }
 
+        /// <summary>
+        ///     2033. Minimum Operations to Make a Uni-Value Grid
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/?envType=daily-question&envId=2026-04-28"/>
+        /// <param name="grid"></param>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public int MinOperations_2033(int[][] grid, int x)
+        {
+            var rows = grid.Length;
+            var cols = grid[0].Length;
+            var arr = new int[rows * cols];
+            var remain = grid[0][0] % x;
+            var opsCount = 0;
+            for (var r = 0; r < rows; ++r)
+            {
+                for (var c = 0; c < cols; ++c)
+                {
+                    if (grid[r][c] % x != remain)
+                        return -1;
+
+                    arr[r * cols + c] = grid[r][c];
+                }
+            }
+            Array.Sort(arr);
+            var medI = arr.Length / 2;
+            var med = arr[medI];
+            for (var i = 0; i < arr.Length; ++i)
+                opsCount += Math.Abs(arr[i] - med) / x;
+            return opsCount;
+
+        }
+
+
+        /// <summary>
+        ///     396 RotateFunction
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/rotate-function/?envType=daily-question&envId=2026-05-01"/>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaxRotateFunction_396(int[] nums)
+        {
+            if (nums.Length < 2)
+                return 0;
+
+            var sumElem = 0;
+            var f0 = 0;
+            for (var i = 0; i < nums.Length; ++i)
+            {
+                sumElem += nums[i];
+                f0 += (i * nums[i]);
+            }
+            var lastElemMul = (nums.Length - 1) * nums[nums.Length - 1];
+            var max = f0;
+            var prevF = f0;
+            for (var k = 1; k < nums.Length; ++k)
+            {
+                var fk = prevF + sumElem - nums[nums.Length - k] - lastElemMul;
+                lastElemMul = (nums.Length - 1) * nums[nums.Length - 1 - k];
+                max = Math.Max(max, fk);
+                prevF = fk;
+            }
+
+            return max;
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using AlgorithmProblems.Quests.SpringSprint;
+using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +19,16 @@ namespace AlgorithmTests
             var sut = new spring.InterviewInstance1.Q3();
             sut.Rob(input).Should().Be(res);
         }
+
+        [TestMethod]
+        [DataRow(new int[] { 10, 6, 8, 5, 11, 9 }, new int[] { 3, 1, 2, 1, 1, 0 })]
+        [DataRow(new int[] { 5, 1, 2, 3, 10 }, new int[] { 4, 1, 1, 1, 0 })]
+        public void CanSeePersonsCount(int[] heights, int[] res)
+        {
+            var sut = new Practice3();
+            sut.CanSeePersonsCount(heights).Should().BeEquivalentTo(res);
+        }
+
+        public void 
     }
 }
