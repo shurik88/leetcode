@@ -328,5 +328,32 @@ namespace AlgorithmProblems
             }
             return Math.Abs(left - right) + underscore;
         }
+
+        /// <summary>
+        ///     1665. Minimum Initial Energy to Finish Tasks
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/?envType=daily-question&envId=2026-05-12"/>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public int MinimumEffort_1665(int[][] tasks)
+        {
+            var curr = 0;
+            var total = 0;
+            var sorted = tasks.OrderByDescending(x => x[1] - x[0]).ToArray();
+            for (var i = 0; i < sorted.Length; ++i)
+            {
+                var required = sorted[i][1] - curr;
+                if (required >= 0)
+                {
+                    total += required;
+                    curr = 0;
+                }
+                else
+                    curr -= sorted[i][1];
+
+                curr += (sorted[i][1] - sorted[i][0]);
+            }
+            return total;
+        }
     }
 }

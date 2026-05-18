@@ -1,10 +1,11 @@
 ﻿using AlgorithmProblems.Structures.Heap;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace AlgorithmProblems
+namespace AlgorithmProblems.LinkedList
 {
-    public class MergeKSortedLists_24
+    public class Solution_24
     {
         public static ListNode MergeKLists(ListNode[] lists)
         {
@@ -12,7 +13,7 @@ namespace AlgorithmProblems
 
             for (var i = 0; i < lists.Length; ++i)
             {
-                if(lists[i] != null)
+                if (lists[i] != null)
                     heapList.Add(new HeapElem<int, ListNode> { Key = lists[i].val, Value = lists[i] });
             }
             if (heapList.Count == 0)
@@ -24,7 +25,7 @@ namespace AlgorithmProblems
             var root = new ListNode(0);
             var currNode = root;
             var currIndex = 0;
-            while(currIndex != heapList.Count)
+            while (currIndex != heapList.Count)
             {
                 var elem = heapList[currIndex];
                 currNode.next = new ListNode(elem.Key);
@@ -40,7 +41,7 @@ namespace AlgorithmProblems
                     MinHeapify(heapList, currIndex, currIndex);
 
                 }
-                
+
             }
 
             return root.next;
@@ -48,7 +49,7 @@ namespace AlgorithmProblems
 
         private static void BuildMinHeap(List<HeapElem<int, ListNode>> arr, int startIndex = 0)
         {
-            var lastParent = (arr.Count - 1- startIndex) / 2;
+            var lastParent = (arr.Count - 1 - startIndex) / 2;
             for (var i = lastParent + startIndex; i >= startIndex; i--)
             {
                 MinHeapify(arr, i, startIndex);
@@ -113,14 +114,5 @@ namespace AlgorithmProblems
                 MaxHeapify(arr, largest, rootIndex);
             }
         }
-    }
-
-    public class ListNode
-    {
-      public int val;
-
-      public ListNode next;
-
-      public ListNode(int x) { val = x; }
     }
 }

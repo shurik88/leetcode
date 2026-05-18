@@ -612,5 +612,93 @@ namespace AlgorithmProblems
             }
             return sum1 == sum2;
         }
+
+        /// <summary>
+        ///     42 Rotate Image in place
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/rotate-image/?envType=daily-question&envId=2026-05-04"/>
+        /// <param name="matrix"></param>
+        public void Rotate_48(int[][] matrix)
+        {
+            var length = matrix.Length;
+            for(var r = 0; r < length / 2; ++r)
+            {
+                for(var c = r + 1; c < length - r; ++c)
+                {
+                    //var s = $"{matrix[r][c]}->{matrix[c][length - r - 1]}->{matrix[length - r - 1][length - c - 1]}->{matrix[length - c - 1][r]}";
+                    (matrix[r][c],matrix[c][length-r-1],matrix[length-r-1][length-c-1],matrix[length-c-1][r])
+=(matrix[length-c-1][r],matrix[r][c],matrix[c][length-r-1],matrix[length-r-1][length-c-1]);
+                }
+            }
+        }
+
+        public int[][] RotateGrid_1914(int[][] grid, int k)
+        {
+            if (k == 0)
+                return grid;
+
+            var rows = grid.Length;
+            var columns = grid[0].Length;
+            int[][] res = new int[rows][];
+            for (var r = 0; r < rows; ++r)
+            {
+                res[r] = new int[columns];
+                for(var c = 0; c < columns; ++c)
+                    res[r][c] = grid[r][c];
+            }
+            //var rotates = new int[Math.Min(m, n) / 2];
+            //for (var i = 0; i < rotates.Length; ++i)
+            //    rotates[i] = ((m - i * 2) * (n - i * 2)) % k;
+
+            static (int Row, int Column) GetIndexes(int plainIndex, int rectRow, int rectColumn, int rotateLevel)
+            {
+                if (plainIndex < rectColumn - 1)
+                {
+                    return (rotateLevel, rotateLevel + plainIndex);
+                }
+                else if (plainIndex < rectRow + rectColumn - 2)
+                {
+                    var diff = plainIndex + 1 - rectColumn;
+                    return (rotateLevel + diff, rotateLevel + rectColumn);
+                }
+                else if (plainIndex < rectRow * 2 + rectColumn - 3)
+                {
+                    var diff = plainIndex - rectColumn - rectRow + 2;
+                    return (rotateLevel + rectRow, rotateLevel + rectColumn - diff - 1);
+                }
+                else
+                {
+                    var diff = plainIndex - rectColumn - rectRow - rectColumn + 3;
+                    return (rotateLevel + rectRow - diff - 1, rotateLevel);
+                }
+            }
+
+            var rotateLevels = Math.Min(rows, columns) / 2;
+            for(var  rl = 0; rl < rotateLevels; ++rl)
+            {
+                var rows1 = rows - rl * 2;
+                var columns1 = columns - rl * 2;
+                var levelLength = (rows1 + columns1 - 2) * 2;
+                var rotateCount = k < levelLength ? k : levelLength % k;
+                if (rotateCount == 0)
+                    continue;
+                
+                
+
+                //var first = (0, 0);
+                for(var j = 0; j < levelLength; ++j)
+                {
+                    (var currR, var currC) = GetIndexes(j, rows1, columns1, rl);
+                    (var fromR, var fromC) = GetIndexes((j + k)% levelLength, rows1, columns1, rl);
+                    res[currR][currC] = grid[fromR][fromC];
+                    //var r1 = j / m1;
+                    //var c1 = j / n1;
+                }
+            }
+
+            return res;
+        }
+
+
     }
 }

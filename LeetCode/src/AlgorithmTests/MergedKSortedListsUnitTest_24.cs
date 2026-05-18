@@ -1,5 +1,6 @@
 ﻿using System;
 using AlgorithmProblems;
+using AlgorithmProblems.LinkedList;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlgorithmTests
@@ -17,7 +18,7 @@ namespace AlgorithmTests
 
         private void Case(ListNode[] input, ListNode output)
         {
-            var res = MergeKSortedLists_24.MergeKLists(input);
+            var res = Solution_24.MergeKLists(input);
             var currIndex = 0;
             var actual = res;
             var expected = output;
@@ -54,7 +55,7 @@ namespace AlgorithmTests
             var list2 = GenerateListNode(new int[] { 1, 4, 5 });//GenerateListNode(1, 3, 3);
             var list1 = GenerateListNode(new int[] { 1, 3, 4 });//GenerateListNode(0, 2, 5);
             var list3 = GenerateListNode(new int[] { 2, 6 });//GenerateListNode(2, 1, 7);
-            var res = MergeKSortedLists_24.MergeKLists(new ListNode[] { list1, list2, list3 });
+            var res = Solution_24.MergeKLists(new ListNode[] { list1, list2, list3 });
         }
 
         private ListNode GenerateListNode(int[] arr)

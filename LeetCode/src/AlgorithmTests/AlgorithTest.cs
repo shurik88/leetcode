@@ -444,5 +444,22 @@ namespace AlgorithmTests
             var sut = new GridAlgorithm();
             sut.MaxPathScore_3742(testCase.Data.Input, testCase.P).Should().Be(testCase.Data.Result);
         }
+
+        [TestMethod]
+        public void MinimumEffort_1165()
+        {
+            var sut = new LifeProblem();
+            sut.MinimumEffort_1665([[1, 2], [2, 4], [4, 8]]);
+        }
+
+        [TestMethod]
+        [DataRow(new int[] { 3, 4, 5, 1, 2 }, 1)]
+        [DataRow(new int[] { 11, 13, 15, 17 }, 11)]
+        [DataRow(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 0)]
+        public void FindMin_153(int[] nums, int min)
+        {
+            var sut = new BinarySearchAlgorithm();
+            sut.FindMin_153(nums).Should().Be(min);
+        }
     }
 }
