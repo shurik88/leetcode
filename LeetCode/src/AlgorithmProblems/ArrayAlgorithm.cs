@@ -7,6 +7,30 @@ namespace AlgorithmProblems
     public class ArrayAlgorithm
     {
         /// <summary>
+        /// 2144. Minimum Cost of Buying Candies With Discount
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/description/?envType=daily-question&envId=2026-06-01"/>
+        /// <param name="cost"></param>
+        /// <returns></returns>
+        public int MinimumCost_2144(int[] cost)
+        {
+            Array.Sort(cost);
+            var sum = 0;
+            var step = 0;
+            for (var i = cost.Length - 1; i >= 0; i--)
+            {
+                sum += cost[i];
+                step++;
+                if (step == 2 && i > 0)
+                {
+                    i--;
+                    step = 0;
+                }
+            }
+            return sum;
+        }
+
+        /// <summary>
         /// 3740. Minimum Distance Between Three Equal Elements I
         /// </summary>
         /// <see cref="https://leetcode.com/problems/minimum-distance-between-three-equal-elements-i/description/?envType=daily-question&envId=2026-04-10"/>

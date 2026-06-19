@@ -82,5 +82,39 @@ namespace AlgorithmProblems
             }
             return Math.Min(nums[left], min);
         }
+
+        /// <summary>
+        /// 33. Search in Rotated Sorted Array
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/search-in-rotated-sorted-array/description/?envType=daily-question&envId=2026-05-22"/>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public int Search(int[] nums, int target)
+        {
+            (var left, var right) = (0, nums.Length - 1);
+            while(left < right)
+            {
+                var mid = left + (right - left) / 2;
+                if (nums[mid] == target)
+                    return mid;
+                else if (nums[left] < nums[mid])
+                {
+                    if (nums[left] <= target && nums[mid] > target)
+                        right = mid - 1;
+                    else
+                        left = mid + 1;
+                }
+                else
+                {
+                    if (nums[right] >= target && nums[mid] < target)
+                        left = mid + 1;
+                    else
+                        right = mid - 1;
+                }
+            }
+            return nums[left] == target ? left : -1;
+
+        }
     }
 }

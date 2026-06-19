@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 
 namespace AlgorithmProblems
@@ -354,6 +355,241 @@ namespace AlgorithmProblems
                 curr += (sorted[i][1] - sorted[i][0]);
             }
             return total;
+        }
+
+        public bool AsteroidsDestroyed(int mass, int[] asteroids)
+        {
+            Array.Sort(asteroids);
+            long curr = mass;
+            for (var i = 0; i < asteroids.Length; ++i)
+            {
+                if (asteroids[i] > curr)
+                    return false;
+
+                curr += asteroids[i];
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 3633. Earliest Finish Time for Land and Water Rides I
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/earliest-finish-time-for-land-and-water-rides-i/description/?envType=daily-question&envId=2026-06-02"/>
+        /// <param name="landStartTime"></param>
+        /// <param name="landDuration"></param>
+        /// <param name="waterStartTime"></param>
+        /// <param name="waterDuration"></param>
+        /// <returns></returns>
+        public int EarliestFinishTime_3633(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration)
+        {
+            var min = int.MaxValue;
+            var minLandEnd = int.MaxValue;
+            for (var i = 0; i < landStartTime.Length; ++i)
+            {
+                var end = landStartTime[i] + landDuration[i];
+                if (end < minLandEnd)
+                    minLandEnd = end;
+            }
+            for (var j = 0; j < waterStartTime.Length; ++j)
+            {
+                min = Math.Min(min, Math.Max(minLandEnd, waterStartTime[j]) + waterDuration[j]);
+            }
+
+            var minWaterEnd = int.MaxValue;
+            for (var j = 0; j < waterStartTime.Length; ++j)
+            {
+                var end = waterStartTime[j] + waterDuration[j];
+                if (end < minWaterEnd)
+                    minWaterEnd = end;
+            }
+            for (var i = 0; i < landStartTime.Length; ++i)
+            {
+                min = Math.Min(min, Math.Max(minWaterEnd, landStartTime[i]) + landDuration[i]);
+            }
+            //for (var i = 0; i < landStartTime.Length; ++i)
+            //{
+            //    for (var j = 0; j < waterStartTime.Length; ++j)
+            //    {
+            //        var firstS = landStartTime[i];
+            //        var firstD = landDuration[i];
+            //        var secondS = waterStartTime[j];
+            //        var secondD = waterDuration[j];
+
+            //        if (secondS < firstS)
+            //        {
+            //            (firstS, secondS) = (secondS, firstS);
+            //            (firstD, secondD) = (secondD, firstD);
+            //        }
+            //        var finish = firstS + firstD;
+            //        finish = finish >= secondS ? finish + secondD : secondS + secondD;
+            //        if (finish < min)
+            //            min = finish;
+            //    }
+            //}
+            return min;
+        }
+
+        /// <summary>
+        /// 3751. Total Waviness of Numbers in Range I
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/total-waviness-of-numbers-in-range-i/description/?envType=daily-question&envId=2026-06-04"/>
+        /// <param name="num1"></param>
+        /// <param name="num2"></param>
+        /// <returns></returns>
+        public int TotalWaviness_3751(int num1, int num2)
+        {
+            var count = num2 - num1 + 1;
+            var total = 0;
+
+            //for(var num = num1; num <= num2; ++num)
+            //{
+            //    var digits = GetDigits(num);
+            //    total += GetWaviness(digits);
+            //}
+
+            var digits = GetDigits(num1);
+
+            for (var i = 0; i < count; ++i)
+            {
+                total += GetWaviness(digits);
+
+                var pos = 0;
+                while(true)
+                {
+                    digits[pos]++;
+                    if (digits[pos] != 10)
+                        break;
+
+                    digits[pos] = 0;
+                    pos++;
+                    if(pos == digits.Count)
+                    {
+                        digits.Add(1);
+                        break;
+                    }
+                }
+
+            }
+
+            return total;
+
+        }
+
+        private static int GetWaviness(List<int> numbers)
+        {
+            if (numbers.Count < 3)
+                return 0;
+
+            var total = 0;
+
+            for(var i = 1; i < numbers.Count - 1; ++i)
+            {
+                if (numbers[i] > numbers[i - 1] && numbers[i] > numbers[i + 1]
+                    || numbers[i] < numbers[i - 1] && numbers[i] < numbers[i + 1])
+                    total++;
+            }
+
+            return total;
+        }
+
+        private static List<int> GetDigits(int num)
+        {
+            var digits = new List<int>(6);
+            while(num > 0)
+            {
+                digits.Add(num % 10);
+                num /=10;
+            }
+            return digits;
+        }
+        /// <summary>
+        ///     3753. Total Waviness of Numbers in Range II
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/total-waviness-of-numbers-in-range-ii/description/?envType=daily-question&envId=2026-06-05"/>
+        /// <param name="num1"></param>
+        /// <param name="num2"></param>
+        /// <returns></returns>
+        public long TotalWaviness_3753(long num1, long num2)
+        {
+            var count = num2 - num1 + 1;
+            var total = 0;
+
+            //for(var num = num1; num <= num2; ++num)
+            //{
+            //    var digits = GetDigits(num);
+            //    total += GetWaviness(digits);
+            //}
+
+            var digits = GetDigits(num1);
+
+            for (var i = 0; i < count; ++i)
+            {
+                total += GetWaviness(digits);
+
+                var pos = 0;
+                while (true)
+                {
+                    digits[pos]++;
+                    if (digits[pos] != 10)
+                        break;
+
+                    digits[pos] = 0;
+                    pos++;
+                    if (pos == digits.Count)
+                    {
+                        digits.Add(1);
+                        break;
+                    }
+                }
+
+            }
+
+            return total;
+        }
+
+        private static List<int> GetDigits(long num)
+        {
+            var digits = new List<int>(6);
+            while (num > 0)
+            {
+                digits.Add((int)(num % 10));
+                num /= 10;
+            }
+            return digits;
+        }
+
+        /// <summary>
+        /// 1732. Find the Highest Altitude
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/find-the-highest-altitude/description/?envType=daily-question&envId=2026-06-19"/>
+        /// <param name="gain"></param>
+        /// <returns></returns>
+        public int LargestAltitude(int[] gain)
+        {
+            var max = 0;
+            var curr = 0;
+            for (var i = 0; i < gain.Length; ++i)
+            {
+                curr += gain[i];
+                if (curr > max)
+                    max = curr;
+            }
+            return max;
+        }
+
+        /// <summary>
+        /// 1344. Angle Between Hands of a Clock
+        /// </summary>
+        /// <see cref="https://leetcode.com/problems/angle-between-hands-of-a-clock/description/?envType=daily-question&envId=2026-06-19"/>
+        /// <param name="hour"></param>
+        /// <param name="minutes"></param>
+        /// <returns></returns>
+        public double AngleClock(int hour, int minutes)
+        {
+            var minuteAngle = minutes * 6;
+            var hourAngle = (hour % 12) * 30 + minutes * 0.5;
+            double angle = Math.Abs(hourAngle - minuteAngle);
+            return angle > 180.0 ? 360.0 - angle : angle;
         }
     }
 }

@@ -7,4 +7,12 @@
 		<Nullable>disable</Nullable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="Quests\Algorithms\Sorting.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Quests\Algorithms\Sorting.cs" />
+	</ItemGroup>
+
 </Project>

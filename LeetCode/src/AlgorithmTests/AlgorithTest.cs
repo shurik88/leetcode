@@ -453,6 +453,14 @@ namespace AlgorithmTests
         }
 
         [TestMethod]
+        [DataRow(new int[] { 94, 85 }, new int[] { 20, 54 }, new int[] { 20, 4 }, new int[] { 2, 35 }, 114)]
+        public void EarliestFinishTime_3633(int[] landS, int[] landD, int[] waterS, int[] waterD, int res)
+        {
+            var sut = new LifeProblem();
+            sut.EarliestFinishTime_3633(landS, landD, waterS, waterD).Should().Be(res);
+        }
+
+        [TestMethod]
         [DataRow(new int[] { 3, 4, 5, 1, 2 }, 1)]
         [DataRow(new int[] { 11, 13, 15, 17 }, 11)]
         [DataRow(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 0)]
@@ -460,6 +468,15 @@ namespace AlgorithmTests
         {
             var sut = new BinarySearchAlgorithm();
             sut.FindMin_153(nums).Should().Be(min);
+        }
+
+        [TestMethod]
+        //[DataRow(new int[] { 1, 10, 100  }, new int[] { 1000 }, 3 )]
+        [DataRow(new int[] { 10 }, new int[] { 17, 11 }, 1)]
+        public void LongestCommonPrefix(int[] arr1, int[] arr2, int expected)
+        {
+            var sut = new Solution_3043();
+            sut.LongestCommonPrefix(arr1, arr2).Should().Be(expected);
         }
     }
 }
